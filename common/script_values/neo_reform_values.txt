@@ -1,0 +1,38 @@
+total_slaves_svalue = {
+	value = 0
+	root = {
+		every_owned_province = {
+			limit = {
+				dominant_province_culture = root.culture 
+				}
+			every_pops_in_province = {
+				limit = { pop_type = slaves }
+				add = 1
+			}
+		}
+	}
+}
+
+population_current_svalue = {
+	value = 0
+	root = {
+		every_owned_province = {
+			limit = {
+				dominant_province_culture = root.culture 
+			}
+			add = total_population
+		}
+	}
+}
+
+slaves_needed_1_svalue = {
+	value = population_current_svalue
+	multiply = 0.1
+	ceiling = yes 
+}
+
+slaves_needed_2_svalue= {
+	value = population_current_svalue
+	multiply = 0.2
+	ceiling = yes 
+}

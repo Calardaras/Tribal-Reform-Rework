@@ -1,0 +1,124 @@
+﻿# test_mission_task_2 = { # Task type
+# icon = "" #[String] Image to show in the mission for the specific mission task
+
+# requires = { test_mission_task_1 } # [{Task type}] Required tasks for starting
+
+# final = yes # [Boolean] (Default no) Whether completing this task completes the mission
+
+# potential = {} # [Trigger] Whether this task should be displayed
+
+# highlight = {} # [Trigger] Which provinces should be highlighted on the map when mouse is over this task. Province is provided in scope = { icon = "task_political" requires = { } }
+
+# allow = {} # [Trigger] Whether the task can be completed
+
+# bypass = {} # [Trigger] Whether the task should be bypassed
+
+# ai_chance = {} # [MTTH] Chance for ai to pick this task over other available
+
+# duration = 10 # [Days] (Optional) Duration for when this task should complete
+
+# monthly_on_action = test_mission_task_2_monthly_pulse # [On-action] Fired monthly
+
+# on_start = {} # [Effect] Executed when the timed task is started. Not valid for instant tasks
+
+# on_completion = {} # [Effect] Executed on completion
+
+# on_bypass  = {} # [Effect] Executed on bypass
+# }
+####################################################################################
+neo_tribal_reform = { 
+
+	header = "mission_image_general"
+	icon = "general_2"
+
+	repeatable = no 
+
+	potential = {
+		is_tribal = yes
+		has_variable = can_neo_tribal_reform
+		NOT = {
+			has_variable = reform_cooldown
+		}
+		has_civil_war = no
+	} 
+
+	abort = {
+		ai_mission_back_out_trigger = yes
+	}
+
+	chance = {
+		factor = 100
+	} 
+
+	on_potential = {} 
+
+	on_start = {
+		start_mission_ai_effect = yes
+	}  
+
+	on_abort = {
+		custom_tooltip = "on_abort_tribal_reform_tt"
+		set_variable = {
+			name = reform_cooldown
+			days = 7300
+		}
+	}  
+
+	on_completion = {
+		complete_mission_effect = yes
+	}
+	neo_tribal_reform_task_1 = {  #Economic branch
+		icon = "task_economical" 
+		allow = {
+			custom_tooltip = {
+				text = neo_tribal_reform_task_1_allow_tt 
+				total_slaves_svalue > slaves_needed_1_svalue 
+			}
+		}
+		highlight = { 
+			ROOT = {
+				any_owned_province = {
+					limit = {
+						dominant_province_culture = root.culture
+					}
+					num_of_slaves > 0
+				}
+			}
+		}
+		
+		duration = 365 # [Days] (Optional) Duration for when this task should complete
+
+		on_start = {
+			trigger_event = {
+				id = neo_tribal_reform.1
+			}
+		} # [Effect] Executed when the timed task is started. Not valid for instant tasks
+
+		on_completion = {
+			trigger_event = {
+				id = neo_tribal_reform.2
+			}
+		} # [Effect] Executed on completion	
+	}
+	neo_tribal_reform_task_1_b = { 
+		icon = "task_political" 
+		requires = {neo_tribal_reform_task_1} 
+		bypass = {
+			NOT = {
+				has_law = personal_loyalty_law
+			}
+		}
+		allow = {
+			has_law = personal_loyalty_law
+		}
+		on_completion = {
+			trigger_event = {
+				id = neo_tribal_reform.3
+			}
+		}
+	}
+	neo_tribal_reform_task_1_c = {
+		icon = "task_political" 
+		requires = {neo_tribal_reform_task_1_b} 
+	}
+}

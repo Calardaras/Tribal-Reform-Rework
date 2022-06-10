@@ -1,0 +1,41 @@
+country_decisions = {
+	neo_tribal_reform_decision = {
+		potential = {
+			num_of_cities >= 1
+			OR = {
+				government = tribal_kingdom
+				government = tribal_federation
+			}
+			is_ai = no
+			NOT = {
+				has_variable = can_tribal_reform
+			}
+		}
+		allow = {
+			stability >= 40
+			centralization >= 0
+			NOT = {
+					any_character = {
+						is_clan_chief = yes
+						loyalty < 33
+					}
+				}
+		}
+		effect = {
+			custom_tooltip = allows_neo_tribal_reform
+			set_variable = {
+				name = can_neo_tribal_reform
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				current_ruler = {
+					char_is_bad_leader_trigger = yes
+				}
+			}
+		}
+	}
+}

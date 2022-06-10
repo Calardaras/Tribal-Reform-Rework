@@ -1,0 +1,12 @@
+slave_labor_modifier = {
+	local_tribesmen_happyness = happiness_large_svalue
+}
+
+happy_priests_modifier = {
+	omen_power = 0.05
+}
+
+happy_warrior_modifier = {
+	land_morale_modifier = 0.05
+	discipline = 0.025
+}

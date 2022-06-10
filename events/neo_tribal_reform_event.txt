@@ -1,0 +1,67 @@
+namespace = neo_tribal_reform
+neo_tribal_reform.1 = {
+	type = country_event
+	title = neo_tribal_reform.1.t
+	desc = neo_tribal_reform.1.desc
+	picture = celtic_village
+	immediate = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					dominant_province_culture = root.culture 
+					
+				}
+				num_of_slaves > 0
+				num_of_tribesmen > 0
+			}
+			add_province_modifier = {
+				name = slave_labor_modifier
+				duration = 180
+			}
+		}
+	}
+	option = {
+        name = neo_tribal_reform.1.a
+    }
+}
+
+neo_tribal_reform.2 = {
+	type = country_event
+	title = neo_tribal_reform.2.t
+	desc = neo_tribal_reform.2.desc
+	picture = celtic_village
+	immediate = {
+		every_owned_province = {
+			limit = {
+				dominant_province_culture = root.culture 
+				num_of_slaves > 0
+				num_of_tribesmen > 0
+			}
+			random_pops_in_province = {
+				limit = {
+					pop_type = tribesmen
+					culture = root.culture 
+				}
+				set_pop_type = freemen
+			}	
+		}
+	}
+	option = {
+        name = neo_tribal_reform.2.a
+    }
+}
+
+neo_tribal_reform.3 = {
+	type = country_event
+	title = neo_tribal_reform.3.t
+	desc = neo_tribal_reform.3.desc
+	picture = celtic_village
+	option = {
+		name = neo_tribal_reform.3.a
+		change_law = increased_council_powers
+	}
+	option = {
+		name = neo_tribal_reform.3.b
+		change_law = absolute_authority
+	}
+}

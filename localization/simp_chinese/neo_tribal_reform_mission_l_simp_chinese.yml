@@ -1,0 +1,9 @@
+﻿l_simp_chinese:
+  neo_tribal_reform:0 "部落改革"
+  neo_tribal_reform_task_1:0 "奴隶劳工"
+  neo_tribal_reform_task_1_b:0 "私有化财产"
+
+
+
+
+  neo_tribal_reform_task_1_allow_tt:0 "#Y 主流文化#!是#Y [SCOPE.GetRootScope.GetCountry.GetPrimaryCulture.GetName]#!或已整合文化的省份中，奴隶至少占#Y 10%#!\n([SCOPE.ScriptValue('total_slaves_svalue')|0Y]/[SCOPE.ScriptValue('slaves_needed_1_svalue')|0Y])"
