@@ -7,16 +7,21 @@ neo_tribal_reform.1 = {
 	immediate = {
 		every_owned_province = {
 			limit = {
-				OR = {
-					dominant_province_culture = root.culture 
-					
+				THIS = {
+					num_of_slaves > 0
+					num_of_tribesmen > 0
+					save_temporary_scope_as = developing_lands
 				}
-				num_of_slaves > 0
-				num_of_tribesmen > 0
+				root = {
+					any_country_culture = {
+						is_culture = scope:developing_lands.dominant_province_culture
+						is_integrated = yes
+					}
+				}
 			}
 			add_province_modifier = {
 				name = slave_labor_modifier
-				duration = 180
+				duration = 365
 			}
 		}
 	}
@@ -33,14 +38,22 @@ neo_tribal_reform.2 = {
 	immediate = {
 		every_owned_province = {
 			limit = {
-				dominant_province_culture = root.culture 
-				num_of_slaves > 0
-				num_of_tribesmen > 0
+				THIS = {
+					num_of_slaves > 0
+					num_of_tribesmen > 0
+					save_temporary_scope_as = developing_lands
+				}
+				root = {
+					any_country_culture = {
+						is_culture = scope:developing_lands.dominant_province_culture
+						is_integrated = yes
+					}
+				}
 			}
 			random_pops_in_province = {
 				limit = {
 					pop_type = tribesmen
-					culture = root.culture 
+					culture = prev.dominant_province_culture
 				}
 				set_pop_type = freemen
 			}	

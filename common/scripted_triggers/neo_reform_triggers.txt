@@ -1,0 +1,25 @@
+is_dominant_or_integrated_trigger = {
+	scope:province = {
+		dominant_province_culture = root.culture
+	}
+}
+
+is_tribal_devoleping = {
+	scope:province = {
+		owner = ROOT
+		num_of_slaves > 0
+		num_of_tribesmen > 0
+		save_temporary_scope_as = developing_lands
+	}
+	scope:province = {
+		AND = {
+			dominant_province_culture = scope:developing_lands.dominant_province_culture
+			root = {
+				any_country_culture = {
+					is_culture = scope:developing_lands.dominant_province_culture
+					is_integrated = yes
+				}
+			}
+		}
+	}
+}
